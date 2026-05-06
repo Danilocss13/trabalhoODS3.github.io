@@ -63,6 +63,7 @@ function getFoodSpoilageResponse(normalizedMessage) {
     'estragado', 'podre', 'cheiro ruim', 'cheiro forte', 'mofado', 'bolor',
     'aparencia duvidosa', 'aparência duvidosa', 'quase estragado', 'perto de estragar',
     'meio escuro', 'meia escura', 'muito escuro', 'muito escura', 'escuro demais', 'escura demais',
+    'muito preto', 'muito preta', 'preto demais', 'preta demais',
     'viscoso', 'pegajoso', 'azedo', 'azedo demais', 'cheiro de amonia', 'cheiro de amônia'
   ];
 
