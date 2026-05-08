@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Doação | Guia ReAlimentar</title>
+  <meta name="description" content="Encontre pontos de doação de alimentos próximos a você. Contribua para reduzir o desperdício e ajudar quem precisa.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+
+  
+  <style>
+    /* ========================================
+       CSS Variables - Design Tokens
+    ======================================== */
+    :root {
+      --primary: #2d7a4f;
+      --primary-light: rgba(45, 122, 79, 0.1);
+      --primary-hover: #246640;
+      --primary-foreground: #ffffff;
+      
+      --accent: #c4a35a;
+      --accent-light: rgba(196, 163, 90, 0.1);
+      --accent-foreground: #3d3420;
+      
+      --background: #f8faf8;
+      --foreground: #1a2e1a;
+      
+      --card: #ffffff;
+      --card-foreground: #1a2e1a;
+      
+      --secondary: #e8f0e8;
+      --secondary-foreground: #2d4a2d;
+      
+      --muted: #e5ebe5;
+      --muted-foreground: #5a7a5a;
+      
+      --border: #d4e4d4;
+      --border-light: rgba(212, 228, 212, 0.5);
+      
+      --success: #22c55e;
+      --success-light: rgba(34, 197, 94, 0.1);
+      
+      --warning: #f59e0b;
+      --warning-light: rgba(245, 158, 11, 0.1);
+      
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      
+      --radius: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-full: 9999px;
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ========================================
+       Reset & Base Styles
+    ======================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    /* ========================================
+       Utility Classes
+    ======================================== */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ========================================
+       Buttons
+    ======================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius);
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--border);
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .btn-accent {
+      background-color: var(--accent);
+      color: var(--accent-foreground);
+    }
+
+    .btn-accent:hover {
+      background-color: #b89a4f;
+    }
+
+    .btn-lg {
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    .btn-desktop {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .btn-desktop {
+        display: inline-flex;
+      }
+    }
+
+    /* Central Educativa nav link */
+    .nav-link-educativo {
+      color: var(--primary) !important;
+      font-weight: 600 !important;
+      border: 1px solid var(--primary);
+      border-radius: 0.5rem;
+      padding: 0.3rem 0.75rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-link-educativo:hover {
+      background: var(--primary);
+      color: #fff !important;
+    }
+
+    /* SVG icon helpers */
+    .icon-close.hidden {
+      display: none;
+    }
+
+    /* ========================================
+       Header
+    ======================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      border-bottom: 1px solid var(--border-light);
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+    }
+
+    .logo:hover {
+      opacity: 0.8;
+    }
+
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-full);
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    .logo-subtitle {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    .nav-desktop {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .nav-desktop {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    .mobile-menu {
+      border-top: 1px solid var(--border);
+      background-color: var(--card);
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+    }
+
+    .mobile-nav-link {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      transition: all 0.2s;
+    }
+
+    .mobile-nav-link:hover {
+      background-color: var(--secondary);
+      color: var(--primary);
+    }
+
+    /* ========================================
+       Hero Section
+    ======================================== */
+    .hero {
+      padding: 3rem 0;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--background) 100%);
+    }
+
+    .hero-content {
+      max-width: 48rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--primary-light);
+      border-radius: var(--radius-full);
+      background-color: var(--primary-light);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    .hero-title-gradient {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      color: var(--muted-foreground);
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+
+    /* ========================================
+       Main Content Layout
+    ======================================== */
+    .main-content {
+      padding: 2rem 0 4rem;
+    }
+
+    .map-layout {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      .map-layout {
+        grid-template-columns: 1fr 360px;
+      }
+    }
+
+    /* ========================================
+       Map Container
+    ======================================== */
+    .map-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-container {
+      position: relative;
+      height: 580px;
+      background-color: var(--card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    @media (min-width: 768px) {
+      .map-container {
+        height: 680px;
+      }
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .map-overlay {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      z-index: 500;
+    }
+
+    .map-legend {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background-color: var(--card);
+      border-radius: var(--radius);
+      font-size: 0.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    .legend-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: var(--radius-full);
+    }
+
+    .legend-dot.active {
+      background-color: var(--success);
+    }
+
+    .legend-dot.busy {
+      background-color: var(--warning);
+    }
+
+    .legend-dot.closed {
+      background-color: #ef4444;
+    }
+
+    /* ========================================
+       Sidebar Panel
+    ======================================== */
+    .sidebar-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .panel-card {
+      background-color: var(--card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background-color: var(--secondary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .panel-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border-radius: var(--radius);
+    }
+
+    .panel-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    .panel-body {
+      padding: 1.25rem;
+    }
+
+    /* ========================================
+       Location Cards
+    ======================================== */
+    .location-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .locations-note {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      background: var(--secondary);
+      border-radius: var(--radius);
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .locations-note i {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .location-card {
+      padding: 1rem;
+      background-color: var(--background);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .location-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .location-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .location-name {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--foreground);
+      margin-bottom: 0.25rem;
+    }
+
+    .location-address {
+      font-size: 0.8125rem;
+      color: var(--muted-foreground);
+    }
+
+    .location-status {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.25rem 0.625rem;
+      border-radius: var(--radius-full);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .location-status.active {
+      background-color: var(--success-light);
+      color: var(--success);
+    }
+
+    .location-status.busy {
+      background-color: var(--warning-light);
+      color: var(--warning);
+    }
+
+    .location-status-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: var(--radius-full);
+      background-color: currentColor;
+    }
+
+    .location-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .location-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    .location-info-item i {
+      color: var(--primary);
+      width: 1rem;
+    }
+
+    .location-foods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+    }
+
+    .food-tag {
+      padding: 0.25rem 0.5rem;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border-radius: var(--radius);
+      font-size: 0.6875rem;
+      font-weight: 500;
+    }
+
+    /* ========================================
+       Statistics
+    ======================================== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-card {
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+
+    .stat-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: 0 auto 0.75rem;
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border-radius: var(--radius-full);
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    /* ========================================
+       Accepted Foods
+    ======================================== */
+    .foods-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .food-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background-color: var(--secondary);
+      border-radius: var(--radius);
+    }
+
+    .food-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+
+    .food-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--foreground);
+    }
+
+    .food-check {
+      margin-left: auto;
+      color: var(--success);
+    }
+
+    /* ========================================
+       Footer
+    ======================================== */
+    .footer {
+      background-color: var(--secondary);
+      padding: 3rem 0 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo-text {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .footer-description {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+
+    .footer-nav-title {
+      font-weight: 600;
+      color: var(--foreground);
+      margin-bottom: 1rem;
+    }
+
+    .footer-nav-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-nav-list a {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      transition: color 0.2s;
+    }
+
+    .footer-nav-list a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-copyright {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* ========================================
+       Animations
+    ======================================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .animate-pulse {
+      animation: pulse 2s infinite;
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">Guia ReAlimentar</span>
+          <span class="logo-subtitle">ODS 3 - Saúde e Bem-estar</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" id="nav-desktop">
+        <a href="index.html" class="nav-link">Início</a>
+        <a href="index.html#nutricao" class="nav-link">Nutrição</a>
+        <a href="index.html#receitaSection" class="nav-link">Receitas</a>
+        <a href="mapa.html" class="nav-link" style="color: var(--primary); font-weight:600;">Mapa de doação</a>
+        <a href="educativo.html" class="nav-link nav-link-educativo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:3px;">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          Central Educativa
+        </a>
+      </nav>
+
+      <button class="btn btn-primary btn-desktop" id="nutribot-btn">Nutribot</button>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"/>
+          <line x1="4" x2="20" y1="6" y2="6"/>
+          <line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+        <svg class="icon-close hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"/>
+          <path d="m6 6 12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu hidden" id="mobile-menu">
+      <nav class="mobile-nav">
+        <a href="index.html" class="mobile-nav-link">Início</a>
+        <a href="index.html#nutricao" class="mobile-nav-link">Nutrição</a>
+        <a href="index.html#receitaSection" class="mobile-nav-link">Receitas</a>
+        <a href="mapa.html" class="mobile-nav-link">Mapa de doação</a>
+        <a href="educativo.html" class="mobile-nav-link">📚 Central Educativa</a>
+        <button class="btn btn-primary btn-full" id="nutribot-btn-mobile">Nutribot</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Encontre pontos de doação</span>
+        </div>
+        
+        <h1 class="hero-title">
+          <span class="hero-title-gradient">Mapa de Pontos de Doação</span>
+        </h1>
+        
+        <p class="hero-description">
+          Localize centros de coleta de alimentos próximos a você. 
+          Sua doação pode fazer a diferença na vida de muitas famílias.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="map-layout">
+        <!-- Map Section -->
+        <div class="map-section">
+          <!-- Map Container -->
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/d/u/0/embed?mid=1I2pQTpK4cEAaNkZNyFnezcnGsVCPS8c&ehbc=2E312F" 
+              width="100%" 
+              height="100%" 
+              style="border:0; border-radius: var(--radius-xl);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Mapa de Pontos de Doação">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Sidebar Panel -->
+        <aside class="sidebar-panel">
+          <!-- Collection Points -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-icon">
+                <i class="fas fa-map-pin"></i>
+              </div>
+              <h3 class="panel-title">Pontos de Coleta</h3>
+            </div>
+            <div class="panel-body">
+              <p class="locations-note"><i class="fas fa-info-circle"></i> Horários indicativos — confirme com cada ponto antes de visitar.</p>
+              <div class="location-list">
+                <!-- Esquadrão da Vida -->
+                <div class="location-card">
+                  <div class="location-header">
+                    <div>
+                      <h4 class="location-name">Esquadrão da Vida (EVIMOC)</h4>
+                      <p class="location-address">R. Joaquim Rabelo, 445 – Alcides Rabelo</p>
+                    </div>
+                  </div>
+                  <div class="location-info">
+                    <span class="location-info-item">
+                      <i class="fas fa-clock"></i> Seg–Sex: 8h–18h
+                    </span>
+                    <span class="location-info-item">
+                      <i class="fas fa-phone"></i> (38) 3222-8656
+                    </span>
+                  </div>
+                  <div class="location-foods">
+                    <span class="food-tag">Cestas básicas</span>
+                    <span class="food-tag">Alimentos secos</span>
+                    <span class="food-tag">Higiene</span>
+                  </div>
+                </div>
+
+                <!-- Espaço Renovo -->
+                <div class="location-card">
+                  <div class="location-header">
+                    <div>
+                      <h4 class="location-name">Espaço Renovo</h4>
+                      <p class="location-address">R. Heliotrópio, 297 – Vila Toncheff</p>
+                    </div>
+                  </div>
+                  <div class="location-info">
+                    <span class="location-info-item">
+                      <i class="fas fa-clock"></i> Seg–Sex: 8h–17h
+                    </span>
+                    <span class="location-info-item">
+                      <i class="fas fa-phone"></i> (38) 9 9139-6838
+                    </span>
+                  </div>
+                  <div class="location-foods">
+                    <span class="food-tag">Alimentos não perecíveis</span>
+                    <span class="food-tag">Grãos</span>
+                  </div>
+                </div>
+
+                <!-- Projeto Servir -->
+                <div class="location-card">
+                  <div class="location-header">
+                    <div>
+                      <h4 class="location-name">Projeto Servir</h4>
+                      <p class="location-address">Montes Claros – MG</p>
+                    </div>
+                  </div>
+                  <div class="location-info">
+                    <span class="location-info-item">
+                      <i class="fas fa-clock"></i> Confirme pelo mapa
+                    </span>
+                  </div>
+                  <div class="location-foods">
+                    <span class="food-tag">Alimentos em geral</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accepted Foods -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <h3 class="panel-title">Alimentos Aceitos</h3>
+            </div>
+            <div class="panel-body">
+              <div class="foods-list">
+                <div class="food-item">
+                  <div class="food-icon">
+                    <i class="fas fa-apple-alt"></i>
+                  </div>
+                  <span class="food-name">Frutas e vegetais frescos</span>
+                  <i class="fas fa-check food-check"></i>
+                </div>
+                <div class="food-item">
+                  <div class="food-icon">
+                    <i class="fas fa-bread-slice"></i>
+                  </div>
+                  <span class="food-name">Pães e massas</span>
+                  <i class="fas fa-check food-check"></i>
+                </div>
+                <div class="food-item">
+                  <div class="food-icon">
+                    <i class="fas fa-seedling"></i>
+                  </div>
+                  <span class="food-name">Grãos e cereais</span>
+                  <i class="fas fa-check food-check"></i>
+                </div>
+                <div class="food-item">
+                  <div class="food-icon">
+                    <i class="fas fa-box"></i>
+                  </div>
+                  <span class="food-name">Alimentos não perecíveis</span>
+                  <i class="fas fa-check food-check"></i>
+                </div>
+                <div class="food-item">
+                  <div class="food-icon">
+                    <i class="fas fa-glass-water"></i>
+                  </div>
+                  <span class="food-name">Bebidas lacradas</span>
+                  <i class="fas fa-check food-check"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-main">
+          <a href="index.html" class="footer-logo">
+            <div class="logo-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <span class="footer-logo-text">Guia ReAlimentar</span>
+          </a>
+          <p class="footer-description">
+            Conectando doadores a quem precisa. Juntos podemos reduzir o desperdício 
+            e garantir que nenhum alimento bom seja jogado fora.
+          </p>
+        </div>
+
+        <div class="footer-nav">
+          <h4 class="footer-nav-title">Navegação</h4>
+          <ul class="footer-nav-list">
+            <li><a href="index.html">Página Inicial</a></li>
+            <li><a href="educativo.html">Central Educativa</a></li>
+            <li><a href="mapa.html">Mapa de Doação</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav">
+          <h4 class="footer-nav-title">Sobre o Projeto</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#">ODS 3 - Saúde</a></li>
+            <li><a href="#">ODS 12 - Consumo Responsável</a></li>
+            <li><a href="#">Sustentabilidade</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Guia ReAlimentar. Todos os direitos reservados.</p>
+        <div class="footer-badge">
+          <i class="fas fa-leaf"></i>
+          ODS 3 e ODS 12
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  
+  <script>
+    // ========================================
+    // Mobile Menu Toggle
+    // ========================================
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconMenu = menuToggle.querySelector('.icon-menu');
+    const iconClose = menuToggle.querySelector('.icon-close');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      iconMenu.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+
+    // ========================================
+    // Button Click Handlers (Visual Only)
+    // ========================================
+    document.querySelectorAll('.map-toolbar .btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Visual feedback only
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          btn.style.transform = '';
+        }, 150);
+      });
+    });
+  </script>
+</body>
+</html>
