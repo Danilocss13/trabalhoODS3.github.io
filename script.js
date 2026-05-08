@@ -840,7 +840,10 @@ async function gerarReceita() {
 function exibirReceita(receita) {
   const btnReceita = document.getElementById("btnReceita");
   btnReceita.disabled = false;
-  btnReceita.innerHTML = "🥗 Gerar receita saudável";
+  btnReceita.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg> Gerar receita saudável`;
 
   const ingredientesHTML = Array.isArray(receita.ingredientes)
     ? receita.ingredientes.map(i => `<li>${i}</li>`).join("")
@@ -1095,6 +1098,37 @@ function addMessage(text, sender) {
   messagesContainer.appendChild(msgDiv);
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
+
+// ============================================================
+// 🎛️ CONTROLE DO BOTÃO ANALISAR
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  const inputAlimentos = document.getElementById('alimentos');
+  const btnAnalisar = document.querySelector('.btn-analyze');
+  const tagsContainer = document.getElementById('tags');
+
+  function toggleBtnAnalisar() {
+    const hasInput = inputAlimentos.value.trim().length > 0;
+    const hasTags = tagsContainer.children.length > 0;
+    if (hasInput || hasTags) {
+      btnAnalisar.style.display = 'inline-flex';
+    } else {
+      btnAnalisar.style.display = 'none';
+    }
+  }
+
+  // Esconder inicialmente
+  btnAnalisar.style.display = 'none';
+
+  // Event listeners
+  inputAlimentos.addEventListener('input', toggleBtnAnalisar);
+  inputAlimentos.addEventListener('keyup', toggleBtnAnalisar);
+
+  // Observar mudanças nos tags
+  const observer = new MutationObserver(toggleBtnAnalisar);
+  observer.observe(tagsContainer, { childList: true });
+});
 
 // Função que processa a mensagem do usuário
 function handleSend() {
