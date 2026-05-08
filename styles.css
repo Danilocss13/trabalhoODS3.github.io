@@ -192,13 +192,25 @@ img {
   font-size: 1rem;
 }
 
-.btn-full {
+.btn-receita {
   width: 100%;
+  margin-top: 2rem;
 }
 
 .btn-analyze {
-  padding: 1.25rem;
+  width: 100%;
+}
+
+.btn-analyze-large {
+  padding: 1rem;
   font-size: 1rem;
+  height: 3.5rem;
+}
+
+.hero-cta-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
 }
 
 .btn-desktop {
