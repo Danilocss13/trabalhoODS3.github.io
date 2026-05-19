@@ -9,51 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/x-icon" href="iconsite.png">
-  <style>
-    /* Central Educativa button - hero */
-    .btn-educativo {
-      border-color: var(--primary, #2d7a4f);
-      color: var(--primary, #2d7a4f);
-      background: transparent;
-    }
-    .btn-educativo:hover {
-      background: var(--primary, #2d7a4f);
-      color: #fff;
-      border-color: var(--primary, #2d7a4f);
-    }
-    /* Central Educativa nav link highlight */
-    .nav-link-educativo {
-      color: var(--primary, #2d7a4f) !important;
-      font-weight: 600 !important;
-      border: 1px solid var(--primary, #2d7a4f);
-      border-radius: 0.5rem;
-      padding: 0.3rem 0.75rem;
-      transition: all 0.2s ease;
-    }
-    .nav-link-educativo:hover {
-      background: var(--primary, #2d7a4f);
-      color: #fff !important;
-    }
-    /* Central Educativa nav style for hero */
-    .btn-educativo-nav {
-      color: var(--primary, #2d7a4f) !important;
-      font-weight: 600 !important;
-      border: 1px solid var(--primary, #2d7a4f);
-      border-radius: 0.5rem;
-      padding: 0.875rem 2rem;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-    .btn-educativo-nav:hover {
-      background: var(--primary, #2d7a4f);
-      color: #fff !important;
-    }
-  </style>
 </head>
 <body>
   <div id="topo"></div>
@@ -73,10 +28,10 @@
       </a>
 
       <nav class="nav-desktop" id="nav-desktop">
-        <a href="#" class="nav-link" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Início</a>
-        <a href="#nutricao" class="nav-link">Nutrição</a>
-        <a href="#receitaSection" class="nav-link" onclick="document.getElementById('receitaSection').classList.remove('hidden'); setTimeout(()=>document.getElementById('receitaSection').scrollIntoView({behavior:'smooth'}),50); return false;">Receitas</a>
-        <a href="mapa.html" class="nav-link">Mapa de doação</a>
+        <a href="#" class="nav-link active" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">🏠 Início</a>
+        <a href="#nutricao" class="nav-link">🥗 Nutrição</a>
+        <a href="#receitaSection" class="nav-link" onclick="document.getElementById('receitaSection').classList.remove('hidden'); setTimeout(()=>document.getElementById('receitaSection').scrollIntoView({behavior:'smooth'}),50); return false;">👨‍🍳 Receitas</a>
+        <a href="mapa.html" class="nav-link">🗺️ Mapa de doação</a>
         <a href="educativo.html" class="nav-link nav-link-educativo">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:3px;">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
@@ -85,7 +40,7 @@
         </a>
       </nav>
 
-      <button class="btn btn-primary btn-desktop" id="nutribot-btn">Nutribot</button>
+      <button class="btn btn-primary btn-nutribot btn-desktop" id="nutribot-btn" type="button">Nutribot</button>
 
       <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
         <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -102,12 +57,12 @@
 
     <div class="mobile-menu hidden" id="mobile-menu">
       <nav class="mobile-nav">
-        <a href="#" class="mobile-nav-link" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Início</a>
-        <a href="#nutricao" class="mobile-nav-link">Nutrição</a>
-        <a href="#receitaSection" class="mobile-nav-link" onclick="document.getElementById('receitaSection').classList.remove('hidden'); setTimeout(()=>document.getElementById('receitaSection').scrollIntoView({behavior:'smooth'}),50); return false;">Receitas</a>
-        <a href="mapa.html" class="mobile-nav-link">Mapa de doação</a>
+        <a href="#" class="mobile-nav-link active" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">🏠 Início</a>
+        <a href="#nutricao" class="mobile-nav-link">🥗 Nutrição</a>
+        <a href="#receitaSection" class="mobile-nav-link" onclick="document.getElementById('receitaSection').classList.remove('hidden'); setTimeout(()=>document.getElementById('receitaSection').scrollIntoView({behavior:'smooth'}),50); return false;">👨‍🍳 Receitas</a>
+        <a href="mapa.html" class="mobile-nav-link">🗺️ Mapa de doação</a>
         <a href="educativo.html" class="mobile-nav-link">📚 Central Educativa</a>
-        <button class="btn btn-primary btn-full" id="nutribot-btn-mobile">Nutribot</button>
+        <button class="btn btn-nutribot btn-full" id="nutribot-btn-mobile" type="button">Nutribot</button>
       </nav>
     </div>
   </header>
@@ -145,7 +100,7 @@
                 <path d="m12 5 7 7-7 7"/>
               </svg>
             </a>
-            <a href="educativo.html" class="btn-educativo-nav">
+            <a href="educativo.html" class="btn btn-lg btn-educativo-nav">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
               </svg>
@@ -195,26 +150,6 @@
             <button class="btn btn-outline btn-lg" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">
               Saiba Mais
             </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Nutribot Chatbot Section -->
-    <section id="nutribot-section" class="section hidden">
-      <div class="container">
-        <div class="section-content">
-          <div class="section-header">
-            <h2 class="section-title">Nutribot - Assistente de Segurança Alimentar</h2>
-            <p class="section-description">Descreva a aparência, cheiro e textura do alimento para verificar sua segurança.</p>
-          </div>
-
-          <div id="food-chatbot-container" class="card card-lg" style="max-width: 600px; margin: 0 auto; padding: 0;">
-            <div id="chatbot-messages" style="max-height: 400px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
-            <div style="display: flex; border-top: 1px solid var(--border); padding: 15px;">
-              <input type="text" id="chatbot-input" placeholder="Ex: A carne está meio viscosa..." style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-sans);">
-              <button id="chatbot-send" style="margin-left: 10px; padding: 10px 20px; border: none; background-color: var(--primary); color: white; border-radius: var(--radius); cursor: pointer; font-family: var(--font-sans);">Enviar</button>
-            </div>
           </div>
         </div>
       </div>
@@ -275,7 +210,7 @@
       </div>
     </section>
 
-    <section id="nutricao" class="section section-alt">
+    <section id="nutricao" class="section section-alt hidden">
       <div class="container">
         <div class="section-content section-content-lg">
           <div class="section-header-inline">
@@ -335,18 +270,17 @@
         <div class="footer-nav">
           <h4 class="footer-nav-title">Navegação</h4>
           <ul class="footer-nav-list">
-            <li><a href="#analise">Análise Nutricional</a></li>
-            <li><a href="#nutricao">Tabela Nutricional</a></li>
-            <li><a href="#sobre">Receitas Saudáveis</a></li>
+            <li><a href="index.html">Página Inicial</a></li>
             <li><a href="educativo.html">Central Educativa</a></li>
+            <li><a href="mapa.html">Mapa de Doação</a></li>
           </ul>
         </div>
 
         <div class="footer-nav">
           <h4 class="footer-nav-title">Sobre o Projeto</h4>
           <ul class="footer-nav-list">
-            <li><a href="#">ODS 3 - Saúde</a></li>
-            <li><a href="#">Sustentabilidade</a></li>
+            <li><a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">ODS 3 - Saúde</a></li>
+            <li><a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">ODS 12 - Consumo Responsável</a></li>
             <li><a href="#">Bem-estar</a></li>
           </ul>
         </div>
@@ -356,16 +290,8 @@
         <p class="footer-copyright">© 2026 Guia ReAlimentar. Todos os direitos reservados.</p>
         <div class="footer-credit">
           <h4 class="footer-credit-title">Desenvolvido por</h4>
-          <ul class="developer-list">
-            <li>Alexsandro Oliveira Ferreira</li>
-            <li>Danilo Cezar Santos Santana</li>
-            <li>George Soares Barbosa</li>
-            <li>Iago Carvalho dos Santos</li>
-            <li>João Victor Costa Maia</li>
-            <li>Lucas Rodrigues dos Santos</li>
-          </ul>
+          <p class="footer-credit-text">Alexsandro Oliveira Ferreira • Danilo Cezar Santos Santana • George Soares Barbosa • Iago Carvalho dos Santos • João Victor Costa Maia • Lucas Rodrigues dos Santos</p>
         </div>
-        <div class="footer-badge">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
             <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
