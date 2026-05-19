@@ -10,10 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="icon" type="image/x-icon" href="iconsite.png">
+  
 
   
   <style>
@@ -195,10 +196,13 @@
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
+      gap: 0.35rem;
+      background-color: #fff;
     }
 
-    .nav-link-educativo:hover {
-      background: var(--primary);
+    .nav-link-educativo:hover,
+    .nav-link-educativo.active {
+      background-color: var(--primary);
       color: #fff !important;
     }
 
@@ -279,14 +283,23 @@
     }
 
     .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--muted-foreground);
-      transition: color 0.2s;
+      font-weight: 600;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 0.5rem;
+      padding: 0.3rem 0.75rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
     }
 
-    .nav-link:hover, .nav-link.active {
-      color: var(--primary);
+    .nav-link:hover,
+    .nav-link.active {
+      background-color: var(--primary);
+      color: #fff;
     }
 
     .menu-toggle {
@@ -318,17 +331,24 @@
     }
 
     .mobile-nav-link {
-      padding: 0.5rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      width: 100%;
+      padding: 0.75rem 1rem;
       border-radius: var(--radius);
       font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--muted-foreground);
-      transition: all 0.2s;
+      font-weight: 600;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      transition: all 0.2s ease;
+      text-decoration: none;
     }
 
-    .mobile-nav-link:hover {
-      background-color: var(--secondary);
-      color: var(--primary);
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+      background-color: var(--primary);
+      color: #fff;
     }
 
     /* ========================================
@@ -873,10 +893,10 @@
       </a>
 
       <nav class="nav-desktop" id="nav-desktop">
-        <a href="index.html" class="nav-link">Início</a>
-        <a href="index.html#nutricao" class="nav-link">Nutrição</a>
-        <a href="index.html#receitaSection" class="nav-link">Receitas</a>
-        <a href="mapa.html" class="nav-link" style="color: var(--primary); font-weight:600;">Mapa de doação</a>
+        <a href="index.html" class="nav-link">🏠 Início</a>
+        <a href="index.html#nutricao" class="nav-link">🥗 Nutrição</a>
+        <a href="index.html#receitaSection" class="nav-link">👨‍🍳 Receitas</a>
+        <a href="mapa.html" class="nav-link active">🗺️ Mapa de doação</a>
         <a href="educativo.html" class="nav-link nav-link-educativo">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:3px;">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
@@ -885,7 +905,7 @@
         </a>
       </nav>
 
-      <button class="btn btn-primary btn-desktop" id="nutribot-btn">Nutribot</button>
+      <button class="btn btn-primary btn-nutribot btn-desktop" id="nutribot-btn" type="button">Nutribot</button>
 
       <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
         <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -902,12 +922,12 @@
 
     <div class="mobile-menu hidden" id="mobile-menu">
       <nav class="mobile-nav">
-        <a href="index.html" class="mobile-nav-link">Início</a>
-        <a href="index.html#nutricao" class="mobile-nav-link">Nutrição</a>
-        <a href="index.html#receitaSection" class="mobile-nav-link">Receitas</a>
-        <a href="mapa.html" class="mobile-nav-link">Mapa de doação</a>
+        <a href="index.html" class="mobile-nav-link">🏠 Início</a>
+        <a href="index.html#nutricao" class="mobile-nav-link">🥗 Nutrição</a>
+        <a href="index.html#receitaSection" class="mobile-nav-link">👨‍🍳 Receitas</a>
+        <a href="mapa.html" class="mobile-nav-link active">🗺️ Mapa de doação</a>
         <a href="educativo.html" class="mobile-nav-link">📚 Central Educativa</a>
-        <button class="btn btn-primary btn-full" id="nutribot-btn-mobile">Nutribot</button>
+        <button class="btn btn-nutribot btn-full" id="nutribot-btn-mobile" type="button">Nutribot</button>
       </nav>
     </div>
   </header>
@@ -1115,8 +1135,8 @@
         <div class="footer-nav">
           <h4 class="footer-nav-title">Sobre o Projeto</h4>
           <ul class="footer-nav-list">
-            <li><a href="#">ODS 3 - Saúde</a></li>
-            <li><a href="#">ODS 12 - Consumo Responsável</a></li>
+            <li><a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">ODS 3 - Saúde</a></li>
+            <li><a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">ODS 12 - Consumo Responsável</a></li>
             <li><a href="#">Sustentabilidade</a></li>
           </ul>
         </div>
@@ -1124,7 +1144,10 @@
 
       <div class="footer-bottom">
         <p class="footer-copyright">© 2026 Guia ReAlimentar. Todos os direitos reservados.</p>
-        <div class="footer-badge">
+        <div class="footer-credit">
+          <h4 class="footer-credit-title">Desenvolvido por</h4>
+          <p class="footer-credit-text">Alexsandro Oliveira Ferreira • Danilo Cezar Santos Santana • George Soares Barbosa • Iago Carvalho dos Santos • João Victor Costa Maia • Lucas Rodrigues dos Santos</p>
+        </div>
           <i class="fas fa-leaf"></i>
           ODS 3 e ODS 12
         </div>
@@ -1162,5 +1185,6 @@
       });
     });
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
