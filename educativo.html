@@ -178,8 +178,8 @@
       color: var(--primary) !important;
       font-weight: 600 !important;
       border: 1px solid var(--primary);
-      border-radius: 0.5rem;
-      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
@@ -252,7 +252,7 @@
     }
 
     .logo-subtitle {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: var(--muted-foreground);
     }
 
@@ -272,13 +272,15 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      font-size: 0.875rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--primary);
-      border: 1px solid var(--primary);
-      border-radius: 0.5rem;
-      padding: 0.3rem 0.75rem;
-      transition: all 0.2s ease;
+      background-color: rgba(45, 122, 79, 0.08);
+      border: 1px solid rgba(45, 122, 79, 0.16);
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      box-shadow: 0 8px 20px rgba(45, 122, 79, 0.08);
       text-decoration: none;
     }
 
@@ -286,6 +288,7 @@
     .nav-link.active {
       background-color: var(--primary);
       color: #fff;
+      transform: translateY(-1px);
     }
 
     .menu-toggle {
@@ -933,7 +936,7 @@
         </div>
         <div class="logo-text">
           <span class="logo-title">Guia ReAlimentar</span>
-          <span class="logo-subtitle">ODS 3 - Saúde e Bem-estar</span>
+          <span class="logo-subtitle">ODS 3 e ODS 12 - Saúde e Consumo Responsável</span>
         </div>
       </a>
 
@@ -1323,19 +1326,21 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer id="sobre" class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-main">
-          <a href="index.html" class="footer-logo">
+          <a href="#" class="footer-logo" onclick="return false;">
             <div class="logo-icon">
-              <i class="fas fa-leaf"></i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
             </div>
             <span class="footer-logo-text">Guia ReAlimentar</span>
           </a>
           <p class="footer-description">
-            Promovendo saúde e bem-estar através da alimentação consciente. 
-            Parte dos Objetivos de Desenvolvimento Sustentável da ONU (ODS 3 e ODS 12).
+            Promovendo saúde e bem-estar através da alimentação consciente. Parte dos Objetivos de Desenvolvimento Sustentável da ONU (ODS 3 e ODS 12).
           </p>
         </div>
 
@@ -1351,9 +1356,9 @@
         <div class="footer-nav">
           <h4 class="footer-nav-title">Sobre o Projeto</h4>
           <ul class="footer-nav-list">
-            <li><a href="#">ODS 3 - Saúde</a></li>
-            <li><a href="#">ODS 12 - Consumo Responsável</a></li>
-            <li><a href="#">Sustentabilidade</a></li>
+            <li><a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">ODS 3 - Saúde</a></li>
+            <li><a href="https://brasil.un.org/pt-br/sdgs" target="_blank" rel="noopener noreferrer">ODS 12 - Consumo Responsável</a></li>
+            <li><a href="#">Bem-estar</a></li>
           </ul>
         </div>
       </div>
@@ -1364,9 +1369,11 @@
           <h4 class="footer-credit-title">Desenvolvido por</h4>
           <p class="footer-credit-text">Alexsandro Oliveira Ferreira • Danilo Cezar Santos Santana • George Soares Barbosa • Iago Carvalho dos Santos • João Victor Costa Maia • Lucas Rodrigues dos Santos</p>
         </div>
-        <div class="footer-badge">
-          <i class="fas fa-leaf"></i>
-          ODS 3 e ODS 12
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+          ODS 3 e ODS 12 - Saúde e Consumo Responsável
         </div>
       </div>
     </div>
