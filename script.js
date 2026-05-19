@@ -811,6 +811,49 @@ function mostrarTabela(dados) {
 // ============================================================
 // 🍽️ GERAR RECEITA (com fallback para API Gemini)
 // ============================================================
+function abrirReceitas() {
+  if (!ultimaTabela.length) {
+    if (alimentosSelecionados.length === 0) {
+      showAnalysisMessage('Selecione pelo menos um alimento antes de abrir Receitas.');
+    } else {
+      showAnalysisMessage('Analise os alimentos antes de gerar receitas.');
+    }
+    const analiseSection = document.getElementById('analise');
+    if (analiseSection) {
+      setTimeout(() => analiseSection.scrollIntoView({ behavior: 'smooth' }), 50);
+    }
+    return false;
+  }
+  const receitaSection = document.getElementById('receitaSection');
+  if (receitaSection) {
+    receitaSection.classList.remove('hidden');
+    setTimeout(() => receitaSection.scrollIntoView({ behavior: 'smooth' }), 50);
+  }
+  return false;
+}
+
+function abrirNutricao() {
+  if (!ultimaTabela.length) {
+    if (alimentosSelecionados.length === 0) {
+      showAnalysisMessage('Selecione pelo menos um alimento antes de ir para Nutrição.');
+    } else {
+      showAnalysisMessage('Analise os alimentos antes de acessar a seção de Nutrição.');
+    }
+    const analiseSection = document.getElementById('analise');
+    if (analiseSection) {
+      setTimeout(() => analiseSection.scrollIntoView({ behavior: 'smooth' }), 50);
+    }
+    return false;
+  }
+  const nutricaoSection = document.getElementById('nutricao');
+  if (nutricaoSection) {
+    nutricaoSection.classList.remove('hidden');
+    nutricaoSection.style.display = 'block';
+    setTimeout(() => nutricaoSection.scrollIntoView({ behavior: 'smooth' }), 50);
+  }
+  return false;
+}
+
 async function gerarReceita() {
   const alimentos = (ultimaTabela.length ? ultimaTabela : alimentosSelecionados).map(a => descricaoParaExibir(a));
   if (alimentos.length === 0) { alert("Selecione alimentos primeiro!"); return; }
