@@ -799,6 +799,12 @@ function mostrarTabela(dados) {
   receitaSection.style.display = "block";
   receitaSection.classList.remove("hidden");
 
+  const nutricaoSection = document.getElementById("nutricao");
+  if (nutricaoSection) {
+    nutricaoSection.classList.remove("hidden");
+    nutricaoSection.style.display = "block";
+  }
+
   setTimeout(() => document.getElementById("nutricao")?.scrollIntoView({ behavior: "smooth" }), 100);
 }
 
@@ -960,17 +966,23 @@ async function init() {
 
   // Input: sugestões e Enter
   const inputElement = document.getElementById("alimentos");
-  inputElement.addEventListener("input", buscarSugestoes);
-  inputElement.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") { e.preventDefault(); analisar(); }
-  });
+  if (inputElement) {
+    inputElement.addEventListener("input", buscarSugestoes);
+    inputElement.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); analisar(); }
+    });
+  }
 
   // Fechar dropdown ao clicar fora
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".search-container")) {
-      document.getElementById("sugestoes").innerHTML = "";
-    }
-  });
+  const sugestoesContainer = document.getElementById("sugestoes");
+  const searchContainer = document.querySelector(".search-container");
+  if (searchContainer && sugestoesContainer) {
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".search-container")) {
+        sugestoesContainer.innerHTML = "";
+      }
+    });
+  }
 
   // Menu mobile
   document.getElementById("menu-toggle")?.addEventListener("click", toggleMenu);
@@ -1193,7 +1205,38 @@ function processMessage(message) {
 }
 
 // Inicialização do chatbot
+function createNutribotWidget() {
+  if (document.getElementById('nutribot-overlay')) return;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'nutribot-overlay';
+  overlay.className = 'nutribot-overlay hidden';
+  overlay.innerHTML = `
+    <div class="nutribot-panel">
+      <div class="nutribot-header">
+        <div class="nutribot-title">
+          <span>NutriBot</span>
+          <small>Segurança alimentar</small>
+        </div>
+        <button type="button" class="nutribot-toggle" aria-label="Minimizar ou abrir NutriBot">✕</button>
+      </div>
+      <div class="nutribot-body">
+        <div id="chatbot-messages" class="nutribot-messages"></div>
+        <div class="nutribot-input-area">
+          <input id="chatbot-input" type="text" placeholder="Descreva o alimento..." autocomplete="off">
+          <button id="chatbot-send" type="button">Enviar</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  overlay.querySelector('.nutribot-toggle')?.addEventListener('click', toggleNutribotWidget);
+}
+
 function initChatbot() {
+  createNutribotWidget();
+
   const sendButton = document.getElementById('chatbot-send');
   const inputField = document.getElementById('chatbot-input');
 
@@ -1203,20 +1246,46 @@ function initChatbot() {
       if (e.key === 'Enter') handleSend();
     });
 
-    // Mensagem inicial
-    addMessage("Olá! Sou o Nutribot, especialista em segurança alimentar. Me descreva a aparência, cheiro e textura do alimento e verificarei no meu sistema se é seguro. Não respondo dúvidas fora do tema alimentação.", 'bot');
+    if (!document.getElementById('nutribot-overlay')?.classList.contains('open')) {
+      addMessage("Olá! Sou o Nutribot, especialista em segurança alimentar. Me descreva a aparência, cheiro e textura do alimento e verificarei no meu sistema se é seguro. Não respondo dúvidas fora do tema alimentação.", 'bot');
+    }
   }
 }
 
-// Toggle da seção do chatbot
-function toggleNutribot() {
-  const section = document.getElementById('nutribot-section');
-  if (section.classList.contains('hidden')) {
-    section.classList.remove('hidden');
-    section.scrollIntoView({ behavior: 'smooth' });
-  } else {
-    section.classList.add('hidden');
+function openNutribotWidget() {
+  let overlay = document.getElementById('nutribot-overlay');
+  if (!overlay) {
+    createNutribotWidget();
+    overlay = document.getElementById('nutribot-overlay');
   }
+  overlay.classList.remove('hidden', 'minimized');
+  overlay.classList.add('open');
+  document.getElementById('chatbot-input')?.focus();
+}
+
+function closeNutribotWidget() {
+  const overlay = document.getElementById('nutribot-overlay');
+  if (!overlay) return;
+  overlay.classList.add('hidden');
+  overlay.classList.remove('open', 'minimized');
+}
+
+function toggleNutribotWidget() {
+  const overlay = document.getElementById('nutribot-overlay');
+  if (!overlay || overlay.classList.contains('hidden')) {
+    openNutribotWidget();
+    return;
+  }
+
+  if (overlay.classList.contains('open')) {
+    closeNutribotWidget();
+  } else {
+    openNutribotWidget();
+  }
+}
+
+function goToNutribot() {
+  toggleNutribotWidget();
 }
 
 // Adicionar event listeners para os botões Nutribot
@@ -1228,9 +1297,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const nutribotBtnMobile = document.getElementById('nutribot-btn-mobile');
 
   if (nutribotBtn) {
-    nutribotBtn.addEventListener('click', toggleNutribot);
+    nutribotBtn.addEventListener('click', goToNutribot);
   }
   if (nutribotBtnMobile) {
-    nutribotBtnMobile.addEventListener('click', toggleNutribot);
+    nutribotBtnMobile.addEventListener('click', goToNutribot);
   }
 });
