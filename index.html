@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ODS 3 - Guia ReAlimentar</title>
-  <meta name="description" content="Plataforma para análise nutricional e receitas saudáveis. Saúde e Bem-estar.">
+  <title>ODS 3 e ODS 12 - Guia ReAlimentar</title>
+  <meta name="description" content="Plataforma para análise nutricional e receitas saudáveis. Saúde e consumo responsável.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -23,14 +23,14 @@
         </div>
         <div class="logo-text">
           <span class="logo-title">Guia ReAlimentar</span>
-          <span class="logo-subtitle">ODS 3 - Saúde e Bem-estar</span>
+          <span class="logo-subtitle">ODS 3 e ODS 12 - Saúde e Consumo Responsável</span>
         </div>
       </a>
 
       <nav class="nav-desktop" id="nav-desktop">
         <a href="#" class="nav-link active" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">🏠 Início</a>
-        <a href="#nutricao" class="nav-link">🥗 Nutrição</a>
-        <a href="#receitaSection" class="nav-link" onclick="document.getElementById('receitaSection').classList.remove('hidden'); setTimeout(()=>document.getElementById('receitaSection').scrollIntoView({behavior:'smooth'}),50); return false;">👨‍🍳 Receitas</a>
+        <a href="#nutricao" class="nav-link" onclick="return abrirNutricao();">🥗 Nutrição</a>
+        <a href="#receitaSection" class="nav-link" onclick="return abrirReceitas();">👨‍🍳 Receitas</a>
         <a href="mapa.html" class="nav-link">🗺️ Mapa de doação</a>
         <a href="educativo.html" class="nav-link nav-link-educativo">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:3px;">
@@ -58,8 +58,8 @@
     <div class="mobile-menu hidden" id="mobile-menu">
       <nav class="mobile-nav">
         <a href="#" class="mobile-nav-link active" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">🏠 Início</a>
-        <a href="#nutricao" class="mobile-nav-link">🥗 Nutrição</a>
-        <a href="#receitaSection" class="mobile-nav-link" onclick="document.getElementById('receitaSection').classList.remove('hidden'); setTimeout(()=>document.getElementById('receitaSection').scrollIntoView({behavior:'smooth'}),50); return false;">👨‍🍳 Receitas</a>
+        <a href="#nutricao" class="mobile-nav-link" onclick="return abrirNutricao();">🥗 Nutrição</a>
+        <a href="#receitaSection" class="mobile-nav-link" onclick="return abrirReceitas();">👨‍🍳 Receitas</a>
         <a href="mapa.html" class="mobile-nav-link">🗺️ Mapa de doação</a>
         <a href="educativo.html" class="mobile-nav-link">📚 Central Educativa</a>
         <button class="btn btn-nutribot btn-full" id="nutribot-btn-mobile" type="button">Nutribot</button>
@@ -141,8 +141,8 @@
                   <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
                 </svg>
               </div>
-              <span class="stat-number">ODS 3</span>
-              <span class="stat-label">Saúde e Bem-estar</span>
+              <span class="stat-number">ODS 3 / ODS 12</span>
+              <span class="stat-label">Saúde e Consumo Responsável</span>
             </div>
           </div>
 
@@ -263,7 +263,7 @@
             <span class="footer-logo-text">Guia ReAlimentar</span>
           </a>
           <p class="footer-description">
-            Promovendo saúde e bem-estar através da alimentação consciente. Parte dos Objetivos de Desenvolvimento Sustentável da ONU (ODS 3).
+            Promovendo saúde e bem-estar através da alimentação consciente. Parte dos Objetivos de Desenvolvimento Sustentável da ONU (ODS 3 e ODS 12).
           </p>
         </div>
 
@@ -296,7 +296,7 @@
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
             <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
           </svg>
-          ODS 3 - Saúde e Bem-estar
+          ODS 3 e ODS 12 - Saúde e Consumo Responsável
         </div>
       </div>
     </div>
